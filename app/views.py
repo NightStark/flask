@@ -31,6 +31,9 @@ def login():
         return redirect('/index')
     else:
         flash("some thing is error.")
-    return render_template('login.html', title="Sign In", form=form)
+    return render_template('login.html',
+                           title="Sign In",
+                           form=form,
+                           providers=app.config['OPENID_PROVIDERS'])
 
 
