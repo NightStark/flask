@@ -23,7 +23,14 @@ def index():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
-    print(form.openid(size=12))
+    flash(form.validate_on_submit())
+    if form.validate_on_submit():
+        flash('Login requested for openID="' +
+              form.openid.data + '" remember_me=' +
+              form.remember_me.data.__str__())
+        return redirect('/index')
+    else:
+        flash("some thing is error.")
     return render_template('login.html', title="Sign In", form=form)
 
 
